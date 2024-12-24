@@ -17,11 +17,11 @@ const play = (stream) => {
 window.onkeydown = function(e) {
   // data {keyCode, meta, alt, ctrl, shift}
   let data = {
-      keyCode: e.keyCode,
-      shift: e.shiftKey,
-      meta: e.metaKey,
-      control: e.ctrlKey,
-      alt: e.altKey
+    keyCode: e.keyCode,
+    shift: e.shiftKey,
+    meta: e.metaKey,
+    control: e.ctrlKey,
+    alt: e.altKey
   }
   peer.emit('robot', 'key', data) 
 }
@@ -32,8 +32,8 @@ window.onmouseup = function(e) {
   data.clientX = e.clientX
   data.clientY = e.clientY
   data.video = {
-      width: video.getBoundingClientRect().width,
-      height: video.getBoundingClientRect().height
+    width: video.getBoundingClientRect().width,
+    height: video.getBoundingClientRect().height
   }
   peer.emit('robot', 'mouse', data)
 }

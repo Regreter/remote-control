@@ -1,4 +1,4 @@
-const { app } = require('electron')
+const { app, globalShortcut } = require('electron')
 const handleIPC = require('./ipc')
 const { createMainWindow, createControlWindow } = require('./windows.js')
 
@@ -16,3 +16,8 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
+
+// 确保在应用退出时注销快捷键
+app.on('will-quit', () => {
+  globalShortcut.unregisterAll()
+})

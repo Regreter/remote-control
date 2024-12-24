@@ -1,4 +1,4 @@
-const { app, BrowserWindow, dialog } = require('electron')
+const { BrowserWindow, globalShortcut } = require('electron')
 const path = require('path')
 
 // 创建主窗口
@@ -19,7 +19,7 @@ function createMainWindow() {
   mainWindow.loadURL('http://localhost:3000');
 }
 
-// // 创建控制窗口
+// 创建控制窗口
 let controlWindow;
 function createControlWindow(){
   controlWindow = new BrowserWindow({
@@ -41,14 +41,32 @@ function createControlWindow(){
       title: '确认',
       message: '确定要关闭傀儡端应用吗？'
     }) === 0) {
-      // 在销毁窗口前发送状态变更事件
-      mainWindow.webContents.send('control-state-change', '', 3);
+      // 检查 mainWindow 是否存在且未被销毁
+      if (mainWindow && !mainWindow.isDestroyed()) {
+        // 检查 webContents 是否存在且未被销毁
+        if (mainWindow.webContents && !mainWindow.webContents.isDestroyed()) {
+          mainWindow.webContents.send('control-state-change', '', 3);
+        }
+      }
       controlWindow.destroy();  // 只销毁当前窗口
     }
   });
 
   const url = `${path.join(__dirname, '../renderer/pages/control/index.html')}`
   controlWindow.loadFile(url)
+
+  // 注册快捷键
+  registerShortcut(controlWindow)
+}
+
+function registerShortcut(win) {
+  // 注册 CMD+OPTION+I (Mac) 快捷键: CommandOrControl+Alt+I
+  globalShortcut.register('CommandOrControl+Alt+I', () => {
+    // 获取当前窗口并打开开发者工具
+    if (win && win.webContents) {
+      win.webContents.toggleDevTools()
+    }
+  })
 }
 
 // 主进程推送（告知状态）
