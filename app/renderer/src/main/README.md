@@ -1,5 +1,32 @@
-# Vue 3 + Vite
+# Remote Control
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+基于 Electron + Vue3 + Vite 的远程控制应用。
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## 技术栈
+
+- 主进程: Electron
+- 渲染进程: Vue3 + Vite + TypeScript
+- 远程控制: robotjs
+
+## 项目结构
+bash
+remote-control/
+├── app/
+│ ├── main/ # Electron 主进程
+│ └── renderer/ # Vue3 渲染进程
+├── package.json
+└── README.md
+
+## 开发环境搭建
+
+1. 安装依赖
+bash
+安装主进程依赖
+npm install
+安装渲染进程依赖
+cd app/renderer/src/main
+npm install
+2. 重建 robotjs（确保与 Electron 版本匹配）
+npx electron-rebuild
+3. 启动开发环境
+npm run start
