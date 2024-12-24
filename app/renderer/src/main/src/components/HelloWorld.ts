@@ -45,14 +45,14 @@ export default defineComponent({
 
     onMounted(() => {
       // 进行登录获取控制码
-      login()
+      login();
       // 监听主进程推送内容（获取控制状态）
-      window.electronAPI.on('control-state-change', handleControlState)
+      (window as any).electronAPI.on('control-state-change', handleControlState)
     })
 
     onUnmounted(() => {
       // 销毁监听
-      window.electronAPI.removeAllListeners('control-state-change')
+      (window as any).electronAPI.removeAllListeners('control-state-change')
     })
     return {
       ...toRefs(state),
