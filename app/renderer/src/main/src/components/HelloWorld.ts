@@ -14,7 +14,7 @@ export default defineComponent({
 
     const login = async () => {
       // 渲染进程请求主进程（获取控制码）
-      const code = await window.electronAPI.invoke('login');
+      const code = await (window as any).electronAPI.invoke('login');
       console.log('获取控制码:',code);
       state.localCode = code
     }
@@ -27,7 +27,7 @@ export default defineComponent({
     // 申请控制
     const startControl = (remoteCode: string) => {
       // 渲染进程发起请求（申请控制）
-      window.electronAPI.send('control', remoteCode)
+      (window as any).electronAPI.send('control', remoteCode)
     }
 
     // 控制状态变更，设置控制状态
