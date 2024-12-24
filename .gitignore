@@ -1,0 +1,31 @@
+# 依赖
+node_modules/
+.pnp
+.pnp.js
+
+# Electron 相关
+**/node_modules/electron/
+.DS_Store
+
+# 构建输出
+dist/
+build/
+
+# 环境文件
+.env
+.env.local
+.env.*.local
+
+# 日志
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 编辑器配置
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
